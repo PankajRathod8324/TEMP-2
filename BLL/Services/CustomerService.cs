@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using  DAL.Interfaces;
+using DAL.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
@@ -23,14 +23,14 @@ public class CustomerService : ICustomerService
 
     private readonly IOrderRepository _orderRepository;
 
-   
+
 
     public CustomerService(ICustomerRepository customerRepository, IOrderRepository orderRepository)
     {
         _customerRepository = customerRepository;
         _orderRepository = orderRepository;
     }
-   
+
 
     public List<Customer> GetAllCustomers()
     {
@@ -41,7 +41,7 @@ public class CustomerService : ICustomerService
     //     return _customerRepository.GetCustomerById(customerId);
     // }
 
-      public CustomerVM GetCustomerByCustomerId(int customerId)
+    public CustomerVM GetCustomerByCustomerId(int customerId)
     {
         var selectedcustomer = _customerRepository.GetCustomerById(customerId);
         var selectedorder = _customerRepository.GetOrderIdByCustomerId(customerId);
@@ -75,6 +75,7 @@ public class CustomerService : ICustomerService
     }
 
 
+
     public IPagedList<CustomerVM> GetFilteredCustomers(UserFilterOptions filterOptions, string orderStatus, string filterdate, string startDate, string endDate)
     {
         var customers = _customerRepository.GetAllCustomers().AsQueryable();
@@ -85,12 +86,12 @@ public class CustomerService : ICustomerService
             customers = customers.Where(u => u.Name.ToString().ToLower().Contains(searchLower));
         }
 
-        
+
         // var orderStatus12 = orders.Where(u => u.OrderStatus.OrderStatusName.ToString().ToLower().Contains(orderStatus.ToLower()));
         // Console.WriteLine(orderStatus12.Count());
 
 
-       
+
 
         // Filtering by date range
         if (!string.IsNullOrEmpty(startDate) && DateTime.TryParse(startDate, out DateTime start))
@@ -133,14 +134,34 @@ public class CustomerService : ICustomerService
 
         //Sorting
 
-        // Sorting
-        // customers = filterOptions.SortBy switch
-        // {
-        //     "OrderId" => (bool)filterOptions.IsAsc ? orders.OrderBy(o => o.OrderId) : orders.OrderByDescending(o => o.OrderId),
-        //     "Date" => (bool)filterOptions.IsAsc ? orders.OrderBy(o => o.Date) : orders.OrderByDescending(o => o.Date),
-        //     "OrderStatus" => (bool)filterOptions.IsAsc ? orders.OrderBy(o => o.OrderStatus) : orders.OrderByDescending(o => o.OrderStatus),
-        //     _ => orders.OrderBy(o => o.Date) // Default sorting
-        // };
+        switch (filterOptions.SortBy)
+        {
+            case "Name":
+                if (filterOptions.IsAsc == true)
+                {
+                    customers = customers.OrderBy(c => c.Name);
+                }
+                else
+                {
+                    customers = customers.OrderByDescending(c => c.Name);
+                }
+                break;
+
+            case "Date":
+                customers = (bool)filterOptions.IsAsc ? customers.OrderBy(c => c.Date) : customers.OrderByDescending(c => c.Date);
+                break;
+
+            case "TotalOrder":
+                customers = (bool)filterOptions.IsAsc
+                    ? customers.OrderBy(c => _customerRepository.GetOrderByCustomerId(c.CustomerId).Count())
+                    : customers.OrderByDescending(c => _customerRepository.GetOrderByCustomerId(c.CustomerId).Count());
+                break;
+
+            default:
+                customers = customers.OrderByDescending(c => c.Date);
+                break;
+        }
+
 
         // Get total count and handle page size dynamically
         int totalTables = customers.Count();
@@ -161,4 +182,5 @@ public class CustomerService : ICustomerService
         return paginatedcustomers;
 
     }
+
 }

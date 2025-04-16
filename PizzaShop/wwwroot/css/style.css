@@ -259,13 +259,13 @@ a:hover {
 }
 
 .active-icon {
-    color: black;
+    color: grey !important;
     /* Highlight active arrow */
     font-weight: bold;
 }
 
 .inactive-icon {
-    color: lightgray;
+    color: lightgray !important;
     /* Dim inactive arrow */
 }
 
@@ -369,3 +369,14 @@ a:hover {
     /* padding: 20px; */
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
 }
+
+.table td,
+.table th {
+    white-space: nowrap;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+

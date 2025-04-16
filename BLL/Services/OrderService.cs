@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using  DAL.Interfaces;
+using DAL.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
@@ -23,18 +23,20 @@ public class OrderService : IOrderService
     private readonly IMenuRepository _menuRepository;
     private readonly ITableAndSectionRepository _tableAndSectionRepository;
 
+    private readonly ICustomerRepository _customerRepository;
     private readonly ITaxRepository _taxRepository;
 
     // private readonly IUserService _userService;
 
-    public OrderService(IOrderRepository orderRepository, IMenuRepository menuRepository, ITableAndSectionRepository tableAndSectionRepository, ITaxRepository taxRepository)
+    public OrderService(IOrderRepository orderRepository, IMenuRepository menuRepository, ITableAndSectionRepository tableAndSectionRepository, ITaxRepository taxRepository, ICustomerRepository customerRepository)
     {
+        _customerRepository = customerRepository;
         _orderRepository = orderRepository;
         _menuRepository = menuRepository;
         _tableAndSectionRepository = tableAndSectionRepository;
         _taxRepository = taxRepository;
     }
-   
+
 
     public List<Order> GetAllOrders()
     {
@@ -74,7 +76,7 @@ public class OrderService : IOrderService
         List<OrderTax> ordertax = _orderRepository.GetOrderTaxesByOrderId(orderId);
         List<OrderTable> ordertable = _orderRepository.GetOrderTablesByOrderId(orderId);
         var payment = _orderRepository.GetPaymentByOrderId(orderId);
-        Console.WriteLine("Hello:"+selectedorder.InvoiceNo);
+        Console.WriteLine("Hello:" + selectedorder.InvoiceNo);
         Console.WriteLine(selectedorder.OrderItems.Count());
         var orderVM = new OrderVM
         {
@@ -196,13 +198,37 @@ public class OrderService : IOrderService
         //Sorting
 
         // Sorting
-        orders = filterOptions.SortBy switch
+        switch (filterOptions.SortBy)
         {
-            "OrderId" => (bool)filterOptions.IsAsc ? orders.OrderBy(o => o.OrderId) : orders.OrderByDescending(o => o.OrderId),
-            "Date" => (bool)filterOptions.IsAsc ? orders.OrderBy(o => o.Date) : orders.OrderByDescending(o => o.Date),
-            "OrderStatus" => (bool)filterOptions.IsAsc ? orders.OrderBy(o => o.OrderStatus) : orders.OrderByDescending(o => o.OrderStatus),
-            _ => orders.OrderBy(o => o.Date) // Default sorting
-        };
+            case "Order":
+                if (filterOptions.IsAsc == true)
+                {
+                    orders = orders.OrderBy(c => c.OrderId);
+                }
+                else
+                {
+                    orders = orders.OrderByDescending(c => c.OrderId);
+                }
+                break;
+
+            case "Date":
+                orders = (bool)filterOptions.IsAsc ? orders.OrderBy(c => c.Date) : orders.OrderByDescending(c => c.Date);
+                break;
+
+            case "Customer":
+                orders = (bool)filterOptions.IsAsc
+                    ? orders.OrderBy(c => _customerRepository.GetCustomerById(c.CustomerId ?? 0).Name)
+                    : orders.OrderByDescending(c => _customerRepository.GetCustomerById(c.CustomerId ?? 0).Name);
+                break;
+
+            case "TotalAmount":
+                orders = (bool)filterOptions.IsAsc ? orders.OrderBy(c => c.TotalAmount) : orders.OrderByDescending(c => c.TotalAmount);
+                break;
+
+            default:
+                orders = orders.OrderByDescending(c => c.Date);
+                break;
+        }
 
         // Get total count and handle page size dynamically
         int totalTables = orders.Count();

@@ -189,7 +189,10 @@
                             <div class="d-flex gap-2"><input type="checkbox">SGST</div>
                         </div>
                         <div class="">
-                            <div class="text-secondary fw-bold subtotal">₹ 0.00</div>
+                            <div>
+                                <span>₹</span>
+                                <span class="text-secondary fw-bold subtotal">0.00</span>
+                            </div>
                             @foreach (var tax in Model.Taxes)
                             {
                                 @if (tax.TaxName != "SGST")
@@ -202,14 +205,20 @@
 
                                 }
                             }
-                            <div class="">₹ 0.00</div>
+                            <div>
+                                <span>₹</span>
+                                <span >0.00</span>
+                            </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="ms-3 d-flex justify-content-between mb-3">
                     <span class="fw-bold">Total</span>
-                    <span class="fw-bold">₹ 0.00</span>
+                    <div>
+                        <span>₹</span>
+                        <span class="finaltotalamt fw-bold">0.00</span>
+                    </div>
                 </div>
                 <div class="ms-3 d-flex justify-content-between mb-3">
                     <div>
@@ -564,27 +573,41 @@
             success: function (response) {
                 $("#modifierdatamodal").modal('hide');
                 $("#orderitemomdifier").append(response);
-                  var rate = $('.itemrate').text();
-                  var modifierrate = $('.modifierrate').text();
-                  console.log(modifierrate);
-                  $('.subtotal')[0].innerHTML = (parseInt(rate) + parseInt(modifierrate)).toPrecision(3);
+                let total = 0;
+                let finalTaxTotal = 0;
+                $(".ItemDataCard").each(function () {
+                    let rate = parseFloat($(this).find('.itemrate').attr('value')) || 0;
+                    let modifierrate = parseFloat($(this).find('.modifierrate').data('amt')) || 0;
+                    total += (rate + modifierrate);
+                });
+
+                $(".subtotal").text(total.toFixed(2));
+
                 $('.taxbtn').each(function () {
                     var tax = $(this).data('amount');
                     var taxtype = $(this).data('type');
-                    var rate = $('.itemrate').text();
+                    let taxValue = 0;
+
                     if (parseInt(taxtype) == 2) {
-                        $(this)[0].innerHTML = ((parseInt(tax) / 100) * parseInt(rate)).toPrecision(3);
+                        $(this)[0].innerHTML = ((parseInt(tax) / 100) * total).toPrecision(3);
+                        taxValue = ((parseInt(tax) / 100) * total).toPrecision(3);
                     }
-                    else{
+                    else {
                         $(this)[0].innerHTML = parseInt(tax).toPrecision(3);
-                    }   
+                        taxValue = parseInt(tax).toPrecision(3);
+                    }
+                    finalTaxTotal += parseFloat(taxValue);
+
                 });
+                let finaltotal = 0;
+                console.log(total + "Total");
+                console.log(finalTaxTotal + "Final Tax Total");
+                @* $(".finaltotal")[0].innerHTML = parseInt(finaltotal).toPrecision(3); *@
+                    @* $(".subtotal").text(total.toFixed(2)); *@
 
-
-
-                ItemDetailsArray = [];
-                selectedmodifier = [];
-                console.log(ItemDetailsArray);
+                $(".finaltotalamt").text(finalAmount.toFixed(2));
+                finaltotal = parseFloat((total + finalTaxTotal)).toPrecision(3);
+                console.log(finaltotal + "Final Total");
             },
             error: function (xhr, status, error) {
                 console.error("Error fetching order details:", error);
@@ -612,6 +635,26 @@
 
     $(document).on("click", ".deleteitembtn", function () {
         $(this).closest(".ItemDataCard").remove();
+        let total = 0;
+
+        $(".ItemDataCard").each(function () {
+            let rate = parseFloat($(this).find('.itemrate').attr('value')) || 0;
+            let modifierrate = parseFloat($(this).find('.modifierrate').data('amt')) || 0;
+            total += (rate + modifierrate);
+        });
+
+        $(".subtotal").text(total.toFixed(2));
+
+        $('.taxbtn').each(function () {
+            var tax = $(this).data('amount');
+            var taxtype = $(this).data('type');
+            if (parseInt(taxtype) == 2) {
+                $(this)[0].innerHTML = ((parseInt(tax) / 100) * total).toPrecision(3);
+            }
+            else {
+                $(this)[0].innerHTML = parseInt(tax).toPrecision(3);
+            }
+        });
         @* var deleteid = $(this).data('groupid');
         console.log(deleteid);
 

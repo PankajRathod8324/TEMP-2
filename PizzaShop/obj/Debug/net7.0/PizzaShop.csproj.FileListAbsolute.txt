@@ -664,6 +664,16 @@ D:\Training\Assignment\Intership Project\PizzaShop_N_Tier\PizzaShop\obj\Debug\ne
 D:\Training\Assignment\Intership Project\PizzaShop_N_Tier\PizzaShop\obj\Debug\net7.0\PizzaShop.pdb
 D:\Training\Assignment\Intership Project\PizzaShop_N_Tier\PizzaShop\obj\Debug\net7.0\PizzaShop.genruntimeconfig.cache
 D:\Training\Assignment\Intership Project\PizzaShop_N_Tier\PizzaShop\obj\Debug\net7.0\ref\PizzaShop.dll
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.csproj.AssemblyReference.cache
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.GeneratedMSBuildEditorConfig.editorconfig
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.AssemblyInfoInputs.cache
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.AssemblyInfo.cs
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.csproj.CoreCompileInputs.cache
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.MvcApplicationPartsAssemblyInfo.cs
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.MvcApplicationPartsAssemblyInfo.cache
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.RazorAssemblyInfo.cache
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.RazorAssemblyInfo.cs
+d:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.sourcelink.json
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\bin\Debug\net7.0\Select.Html.dep
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\bin\Debug\net7.0\appsettings.Development.json
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\bin\Debug\net7.0\appsettings.json
@@ -973,15 +983,6 @@ D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\bin\Debug\net7.0\Entiti
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\bin\Debug\net7.0\BLL.pdb
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\bin\Debug\net7.0\DAL.pdb
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\bin\Debug\net7.0\Entities.pdb
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.csproj.AssemblyReference.cache
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.GeneratedMSBuildEditorConfig.editorconfig
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.AssemblyInfoInputs.cache
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.AssemblyInfo.cs
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.csproj.CoreCompileInputs.cache
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.MvcApplicationPartsAssemblyInfo.cs
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.MvcApplicationPartsAssemblyInfo.cache
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.RazorAssemblyInfo.cache
-D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\PizzaShop.RazorAssemblyInfo.cs
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\scopedcss\bundle\PizzaShop.styles.css
 D:\PizzaShop_N_Tier-main\PizzaShop_N_Tier-main\PizzaShop\obj\Debug\net7.0\scopedcss\projectbundle\PizzaShop.bundle.scp.css

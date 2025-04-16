@@ -2,8 +2,8 @@ using System.Diagnostics;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Nodes;
-using  DAL.Interfaces;
-using  DAL.Repository;
+using DAL.Interfaces;
+using DAL.Repository;
 using ClosedXML.Excel;
 using Entities.Models;
 using Entities.ViewModel;
@@ -40,6 +40,8 @@ public class CustomerController : Controller
         filterOptions.PageSize = filterOptions.PageSize != 0 ? filterOptions.PageSize : 10; // Default page size
 
         ViewBag.PageSize = filterOptions.PageSize;
+        ViewBag.SortBy = filterOptions.SortBy;
+        ViewBag.IsAsc = filterOptions.IsAsc;
 
 
 

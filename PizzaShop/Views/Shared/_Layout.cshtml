@@ -139,9 +139,9 @@
                                 </svg>
                             </a>
                         }
-                        @if(@user.RoleId == 1)
+                        @if (@user.RoleId == 1)
                         {
-                             <a class="dropdown-item d-flex align-items-center py-2" asp-area=""
+                            <a class="dropdown-item d-flex align-items-center py-2" asp-area=""
                                 asp-controller="AccountManagerOrderApp" asp-action="KOT">
                                 <svg xmlns="http://www.w3.org/2000/svg" id="mobileicon" width="22" height="22" asp-area=""
                                     asp-controller="User" asp-action="Changepassword" fill="currentColor"
@@ -264,9 +264,10 @@
                 </div>
                 <div class="modal-footer d-flex align-items-center justify-content-center">
                     <form asp-controller="Authentication" asp-action="Logout" method="post">
-                        <button type="submit" class="btn btn-primary">Yes</button>
+                        <button type="submit" class="btn  webybg  fs-6 fw-bold  text-white px-4">YES</button>
                     </form>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn  webyborder webybtn fw-bold px-4"
+                        data-bs-dismiss="modal">NO</button>
                 </div>
             </div>
         </div>

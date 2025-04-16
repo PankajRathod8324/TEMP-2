@@ -14,7 +14,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @* <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" /> *@
     @* <script src='https://code.jquery.com/jquery-3.7.0.js'></script> *@
-
+    <style>
+        .active {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,7 +56,7 @@
                         <div class="overflow-y-scroll  mt-3" style="max-width: 1000px; max-height: 600px;">
                             @foreach (var category in Model.menuCategories)
                             {
-                                <div class="row hoverDivCategory">
+                                <div class="row hoverDiv">
                                     <div class="col">
                                         <p class="fs-5"><i class="fa-solid fa-grip-vertical me-2"></i>@category.CategoryName
                                         </p>
@@ -100,7 +105,7 @@
                 @foreach (var category in Model.menuCategories)
                 {
                     var modalId = "deleteModal" + category.CategoryId;
-                    <div class="row hoverDivCategory" data-id="@category.CategoryId">
+                    <div class="row hoverDiv" data-id="@category.CategoryId">
                         <div class="col-9">
                             <p class="fs-5" data-id="@category.CategoryId">
                                 <i class=" fa-solid fa-grip-vertical me-2"></i>@category.CategoryName
@@ -491,6 +496,11 @@
             const categoryItems = document.querySelectorAll(".hoverDiv");
             console.log("Hello");
 
+            // Set the first item as active by default
+            if (categoryItems.length > 0) {
+                categoryItems[0].classList.add("active");
+            }
+
             categoryItems.forEach(item => {
                 item.addEventListener("click", function () {
                     // Remove active class from all categories
@@ -500,7 +510,18 @@
                 });
             });
         });
+
         $(document).ready(function () {
+            const categoryItems = document.querySelectorAll(".hoverDiv");
+            console.log("Hello" + $(".hoverDiv").first());
+
+            // Set the first item as active by default
+            if (categoryItems.length > 0) {
+                $(".hoverDiv").removeClass("active");          // make sure nothing else is active
+                $(".hoverDiv").first().addClass("active");
+                console.log("Hello");
+            }
+
             $(".pagination-btn-edit").click(function (e) {
                 e.preventDefault();
                 let page = $(this).data("page");
@@ -525,8 +546,8 @@
                 }
             });
 
-            $(".hoverDivCategory").click(function () {
-                $(".hoverDivCategory").removeClass("active");
+            $(".hoverDiv").click(function () {
+                $(".hoverDiv").removeClass("active");
                 $(this).addClass("active");
                 console.log("hello i am in");
                 selectedCategoryId = $(this).data("id");

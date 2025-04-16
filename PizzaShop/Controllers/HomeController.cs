@@ -85,6 +85,7 @@ public class HomeController : Controller
 
         return View(userViewModels);
     }
+    
 
     [Authorize(Policy = "MenuViewPolicy")]
     public IActionResult Menu()

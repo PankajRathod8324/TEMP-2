@@ -8,43 +8,51 @@
             <thead class="bg-light">
                 <tr>
                     <th class="text-secondary fs-6">
-                        <a asp-action="Userpage" asp-route-sortBy="Name"
-                            asp-route-isAsc="@(ViewBag.SortBy == "Name" ? !ViewBag.IsAsc : true)"
-                            class="sorting-link text-secondary">
+                        <a href="#" class="sorting-link text-secondary">
                             #Order
                             <span class="icon-box">
-                                <i
-                                    class="fa-solid fa-arrow-up @(ViewBag.SortBy == "Name" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
-                                <i
-                                    class="fa-solid fa-arrow-down @(ViewBag.SortBy == "Name" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
+                                <i class="fa-solid fa-arrow-up ajax-sort @(ViewBag.SortBy == "Order" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="Order"
+                                    data-isasc="@(ViewBag.SortBy == "Order" ? !ViewBag.IsAsc : true)">
+                                </i>
+
+                                <i class="fa-solid fa-arrow-down ajax-sort @(ViewBag.SortBy == "Order" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="Order"
+                                    data-isasc="@(ViewBag.SortBy == "Order" ? !ViewBag.IsAsc : false)">
+                                </i>
                             </span>
                         </a>
                     </th>
 
                     <th class="text-secondary fs-6">
-                        <a asp-action="Userpage" asp-route-sortBy="Name"
-                            asp-route-isAsc="@(ViewBag.SortBy == "Name" ? !ViewBag.IsAsc : true)"
-                            class="sorting-link text-secondary">
+                        <a href="#" class="sorting-link text-secondary">
                             Date
                             <span class="icon-box">
-                                <i
-                                    class="fa-solid fa-arrow-up @(ViewBag.SortBy == "Name" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
-                                <i
-                                    class="fa-solid fa-arrow-down @(ViewBag.SortBy == "Name" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
+                                <i class="fa-solid fa-arrow-up ajax-sort @(ViewBag.SortBy == "Date" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="Date" data-isasc="@(ViewBag.SortBy == "Date" ? !ViewBag.IsAsc : true)">
+                                </i>
+
+                                <i class="fa-solid fa-arrow-down ajax-sort @(ViewBag.SortBy == "Date" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="Date"
+                                    data-isasc="@(ViewBag.SortBy == "Date" ? !ViewBag.IsAsc : false)">
+                                </i>
                             </span>
                         </a>
                     </th>
 
                     <th class="text-secondary fs-6">
-                        <a asp-action="Userpage" asp-route-sortBy="Name"
-                            asp-route-isAsc="@(ViewBag.SortBy == "Name" ? !ViewBag.IsAsc : true)"
-                            class="sorting-link text-secondary">
+                        <a href="#" class="sorting-link text-secondary">
                             Customer
                             <span class="icon-box">
-                                <i
-                                    class="fa-solid fa-arrow-up @(ViewBag.SortBy == "Name" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
-                                <i
-                                    class="fa-solid fa-arrow-down @(ViewBag.SortBy == "Name" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
+                                <i class="fa-solid fa-arrow-up ajax-sort @(ViewBag.SortBy == "Customer" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="Customer"
+                                    data-isasc="@(ViewBag.SortBy == "Customer" ? !ViewBag.IsAsc : true)">
+                                </i>
+
+                                <i class="fa-solid fa-arrow-down ajax-sort @(ViewBag.SortBy == "Customer" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="Customer"
+                                    data-isasc="@(ViewBag.SortBy == "Customer" ? !ViewBag.IsAsc : false)">
+                                </i>
                             </span>
                         </a>
                     </th>
@@ -53,15 +61,18 @@
                     <th class="text-secondary fs-6">Payment Mode</th>
                     <th class="text-secondary fs-6">Rating</th>
                     <th>
-                        <a asp-action="Userpage" asp-route-sortBy="Name"
-                            asp-route-isAsc="@(ViewBag.SortBy == "Name" ? !ViewBag.IsAsc : true)"
-                            class="sorting-link text-secondary">
+                        <a href="#" class="sorting-link text-secondary">
                             Total Amount
                             <span class="icon-box">
-                                <i
-                                    class="fa-solid fa-arrow-up @(ViewBag.SortBy == "Name" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
-                                <i
-                                    class="fa-solid fa-arrow-down @(ViewBag.SortBy == "Name" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"></i>
+                                <i class="fa-solid fa-arrow-up ajax-sort @(ViewBag.SortBy == "TotalAmount" && ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="TotalAmount"
+                                    data-isasc="@(ViewBag.SortBy == "TotalAmount" ? !ViewBag.IsAsc : true)">
+                                </i>
+
+                                <i class="fa-solid fa-arrow-down ajax-sort @(ViewBag.SortBy == "TotalAmount" && !ViewBag.IsAsc ? "active-icon" : "inactive-icon")"
+                                    data-sortby="TotalAmount"
+                                    data-isasc="@(ViewBag.SortBy == "TotalAmount" ? !ViewBag.IsAsc : false)">
+                                </i>
                             </span>
                         </a>
                     </th>
@@ -187,6 +198,27 @@
             $("#pageSizeDropdown").change(function () {
                 console.log("Dropdown changed");
                 loadTaxes(1); // Reset to page 1 when changing page size
+            });
+            $(document).on("click", ".ajax-sort", function (e) {
+                e.preventDefault();
+
+                const sortBy = $(this).data("sortby");
+                const isAsc = $(this).data("isasc");
+
+                $.ajax({
+                    url: '/Order/Order',
+                    type: 'GET',
+                    data: {
+                        sortBy: sortBy,
+                        isAsc: isAsc
+                    },
+                    success: function (data) {
+                        $("#orderTable").html(data);
+                    },
+                    error: function () {
+                        alert("Failed to load data.");
+                    }
+                });
             });
             $(".saveBtn").click(function () {
                 console.log("Search Button Clicked");
